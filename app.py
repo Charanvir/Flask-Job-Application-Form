@@ -1,10 +1,9 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, flash
 from flask_sqlalchemy import SQLAlchemy
 import os
 from dotenv import load_dotenv
 
 load_dotenv()
-print(os.getenv("PASSWORD"))
 # Create an app instance
 app = Flask(__name__)
 # This will guard the appliction from hackers, cookies, and hijacking functionality
@@ -38,6 +37,7 @@ def index():
 
         db.session.add(form)
         db.session.commit()
+        flash("Your form was submitted successfully!")
 
     return render_template("index.html")
 
